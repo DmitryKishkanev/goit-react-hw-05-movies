@@ -1,16 +1,27 @@
 import { NavLink } from 'react-router';
+import PropTypes from 'prop-types';
 
 const MovieList = ({ movies }) => {
   return (
     <div>
       {movies.map(movie => (
         <div key={movie.id}>
-          <NavLink to={`${movie.id}`}></NavLink>
-          <h3>{movie.name}</h3>
+          <NavLink to={`/movies/${movie.id}`}>
+            <h3>{movie.name}</h3>
+          </NavLink>
         </div>
       ))}
     </div>
   );
+};
+
+MovieList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default MovieList;

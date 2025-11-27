@@ -8,6 +8,12 @@ export const getMovies = () => {
   return movies;
 };
 
+export const getMovieByName = movieName => {
+  return movies.find(
+    movie => movie.name.toLowerCase().trim() === movieName.toLowerCase().trim(),
+  );
+};
+
 export const getMovieById = movieId => {
   return movies.find(movie => movie.id === movieId);
 };
