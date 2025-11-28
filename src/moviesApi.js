@@ -1,3 +1,8 @@
+import axios from 'axios';
+
+const myKey = import.meta.env.VITE_TMDB_TOKEN;
+const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
+
 const movies = [
   { id: 'm-1', name: 'Movie 1' },
   { id: 'm-2', name: 'Movie 2' },
