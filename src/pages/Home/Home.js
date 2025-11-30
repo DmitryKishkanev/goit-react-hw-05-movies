@@ -1,11 +1,21 @@
+import { useState, useEffect } from 'react';
+import { fetchMovies } from 'moviesApi';
 import MovieList from 'components/MovieList';
-import { getMovies } from 'moviesApi';
 
 const Home = () => {
-  const movies = getMovies();
-  // useEffect(() => {
-  //   // HTTP Запрос, если нужно
-  // }, []);
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const resMovies = await fetchMovies('trending/movie/day');
+        setMovies(resMovies.results);
+      } catch (error) {
+        console.error('Ошибка при получении фильмов:', error);
+      }
+    };
+    getMovies();
+  }, []);
 
   return (
     <main>

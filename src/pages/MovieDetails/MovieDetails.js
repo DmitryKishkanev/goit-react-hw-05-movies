@@ -1,13 +1,26 @@
 import { useParams, useLocation, NavLink, Outlet } from 'react-router-dom';
-import { useRef } from 'react';
-import { getMovieById } from 'moviesApi';
+import { useRef, useState, useEffect } from 'react';
+import { fetchMovies } from 'moviesApi';
 import BackLink from 'components/BackLink';
+import MoviesItem from 'components/MoviesItem';
 
 const MovieDetails = () => {
+  const [movie, setMovie] = useState({});
   const { movieId } = useParams();
-  const movie = getMovieById(movieId);
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? '/movies');
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const resMovies = await fetchMovies(`movie/${movieId}`);
+        setMovie(resMovies);
+      } catch (error) {
+        console.error('Ошибка при получении фильмов:', error);
+      }
+    };
+    getMovies();
+  }, [movieId]);
 
   if (!movie) {
     return <p>Фильм не найден или данные ещё загружаются...</p>;
@@ -15,9 +28,8 @@ const MovieDetails = () => {
   return (
     <main>
       <BackLink to={backLinkHref.current}>Go back</BackLink>
-      <h2>
-        Details: {movie.name} - {movieId}
-      </h2>
+      <MoviesItem movie={movie} />
+
       <ul>
         <li>
           <NavLink to="cast">Cast</NavLink>

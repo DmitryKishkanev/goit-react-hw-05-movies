@@ -8,7 +8,7 @@ const MovieList = ({ movies }) => {
       {movies.map(movie => (
         <div key={movie.id}>
           <NavLink to={`/movies/${movie.id}`} state={{ from: location }}>
-            <h3>{movie.name}</h3>
+            <h3>{movie.title}</h3>
           </NavLink>
         </div>
       ))}
@@ -20,7 +20,7 @@ MovieList.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };

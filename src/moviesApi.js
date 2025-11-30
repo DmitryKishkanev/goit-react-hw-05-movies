@@ -1,7 +1,26 @@
 import axios from 'axios';
+import { TMDB_API_KEY } from 'config';
 
-const myKey = import.meta.env.VITE_TMDB_TOKEN;
-const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+axios.defaults.headers.common['Authorization'] = `Bearer ${TMDB_API_KEY}`;
+
+export async function fetchMovies(endpoint) {
+  try {
+    const response = await axios.get(endpoint, {
+      params: {
+        language: 'en-US',
+        page: 1,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Ошибка при получении фильмов:', error);
+    throw error;
+  }
+}
+
+fetchMovies('trending/movie/day').then(result => console.log(result));
 
 const movies = [
   { id: 'm-1', name: 'Movie 1' },
