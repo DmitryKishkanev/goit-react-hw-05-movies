@@ -16,7 +16,7 @@ const MovieDetails = () => {
         const resMovies = await fetchMovies(`movie/${movieId}`);
         setMovie(resMovies);
       } catch (error) {
-        console.error('Ошибка при получении фильмов:', error);
+        console.error('Error receiving movie:', error);
       }
     };
     getMovies();

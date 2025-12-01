@@ -11,7 +11,7 @@ const Home = () => {
         const resMovies = await fetchMovies('trending/movie/day');
         setMovies(resMovies.results);
       } catch (error) {
-        console.error('Ошибка при получении фильмов:', error);
+        console.error('Error when receiving movies:', error);
       }
     };
     getMovies();
