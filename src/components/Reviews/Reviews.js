@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchMovies } from 'moviesApi';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const { movieId } = useParams();
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    navigate(`..`);
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -57,6 +61,9 @@ const Reviews = () => {
           ))}
         </ul>
       )}
+      <button type="button" onClick={handleClose}>
+        Close
+      </button>
     </div>
   );
 };

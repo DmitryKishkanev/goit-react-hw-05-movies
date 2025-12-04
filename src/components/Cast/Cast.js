@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchMovies } from 'moviesApi';
 import noImage from 'img/no-image.jpg';
 
@@ -8,6 +8,11 @@ const Cast = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { movieId } = useParams();
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    navigate(`..`);
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -41,26 +46,35 @@ const Cast = () => {
 
   return (
     <div>
-      {
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : castList.length === 0 ? (
+        <p>We don't have a cast list for this movie</p>
+      ) : (
         <ul>
-          {castList &&
-            castList.map(castItem => (
-              <li key={castItem.credit_id}>
-                <img
-                  src={
-                    castItem.profile_path
-                      ? `https://image.tmdb.org/t/p/w200${castItem.profile_path}`
-                      : noImage
-                  }
-                  alt={castItem.name}
-                />
+          {castList.map(castItem => (
+            <li key={castItem.credit_id}>
+              <img
+                src={
+                  castItem.profile_path
+                    ? `https://image.tmdb.org/t/p/w200${castItem.profile_path}`
+                    : noImage
+                }
+                alt={castItem.name}
+              />
 
-                <p>{castItem.original_name}</p>
-                <p>{`Character: ${castItem.character}`}</p>
-              </li>
-            ))}
+              <p>{castItem.original_name}</p>
+              <p>{`Character: ${castItem.character}`}</p>
+            </li>
+          ))}
         </ul>
-      }
+      )}
+
+      <button type="button" onClick={handleClose}>
+        Close
+      </button>
     </div>
   );
 };
