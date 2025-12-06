@@ -1,5 +1,5 @@
 import { useParams, useLocation, NavLink, Outlet } from 'react-router-dom';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, Suspense } from 'react';
 import { fetchMovies } from 'moviesApi';
 import BackLink from 'components/BackLink';
 import MoviesItem from 'components/MoviesItem';
@@ -38,7 +38,9 @@ const MovieDetails = () => {
           <NavLink to="reviews">Reviews</NavLink>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
