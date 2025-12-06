@@ -11,14 +11,7 @@ import { Container } from 'components/App/App.styled';
 const Home = lazy(() => import('pages/Home'));
 const Movies = lazy(() => import('pages/Movies'));
 const MovieDetails = lazy(() => import('pages/MovieDetails'));
-// const Cast = lazy(() => import('components/Cast'));
-const Cast = lazy(
-  () =>
-    new Promise(resolve => {
-      setTimeout(() => resolve(import('components/Cast')), 5000); // задержка 5 секунд
-    }),
-);
-
+const Cast = lazy(() => import('components/Cast'));
 const Reviews = lazy(() => import('components/Reviews'));
 
 export default function App() {
