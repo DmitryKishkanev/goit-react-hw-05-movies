@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchMovies } from 'moviesApi';
+import {
+  ReviewsContainer,
+  ReviewsSection,
+  ReviewsSectionItem,
+  ReviewsSectionButton,
+} from 'components/Reviews/Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -44,7 +50,7 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <div>
+    <ReviewsContainer>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -52,19 +58,19 @@ const Reviews = () => {
       ) : reviews.length === 0 ? (
         <p>We don't have any reviews for this movie</p>
       ) : (
-        <ul>
+        <ReviewsSection>
           {reviews.map(review => (
-            <li key={review.id}>
+            <ReviewsSectionItem key={review.id}>
               <h4>{review.author}</h4>
               <p>{review.content}</p>
-            </li>
+            </ReviewsSectionItem>
           ))}
-        </ul>
+        </ReviewsSection>
       )}
-      <button type="button" onClick={handleClose}>
+      <ReviewsSectionButton type="button" onClick={handleClose}>
         Close
-      </button>
-    </div>
+      </ReviewsSectionButton>
+    </ReviewsContainer>
   );
 };
 

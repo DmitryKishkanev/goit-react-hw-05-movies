@@ -3,15 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 const LayoutHeader = styled.header`
   display: flex;
-  /* flex-direction: column; */
-  align-items: end;
+  align-items: center;
   justify-content: space-between;
-  padding: 15px 0;
+  padding: 10px 6px;
   margin-bottom: 30px;
 
   width: 95%;
 
-  border-bottom: 1px solid black;
+  box-shadow: 0px 6px 2px -2px rgba(0, 0, 0, 0.2);
 `;
 
 const LayoutTitle = styled.h1`
@@ -26,7 +25,6 @@ const LayoutTitle = styled.h1`
 
   &:hover,
   &:focus {
-    /* transform: scale(1); */
     color: rgb(33, 150, 243);
   }
 `;
@@ -34,11 +32,9 @@ const LayoutTitle = styled.h1`
 const LayoutList = styled.ul`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   padding: 0;
   margin: 0 0 0 auto;
-
-  /* list-style: none; */
 `;
 
 const LayoutIten = styled.li`
@@ -49,9 +45,10 @@ const LayoutIten = styled.li`
   cursor: pointer;
 
   & .active {
-    padding: 6px;
-    border-radius: 4px;
+    padding: 10px 20px;
+    border-radius: 8px;
     background-color: rgb(33, 150, 243);
+    color: white;
   }
 `;
 
@@ -75,7 +72,6 @@ const StyledNavLink = styled(NavLink)`
   }
 
   &.active {
-    /* background-color: rgba(84, 178, 255, 1); */
     color: black;
   }
 `;

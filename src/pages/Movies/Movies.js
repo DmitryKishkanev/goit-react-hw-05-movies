@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-// import MovieList from 'components/MovieList';
 import SearchBox from 'components/SearchBox';
 import MovieList from 'components/MovieList';
 import { fetchMovies } from 'moviesApi';
+import { MoviesMain } from 'pages/Movies/Movies.styled';
 
 const Movies = () => {
   const [movie, setMovie] = useState([]);
@@ -36,10 +36,10 @@ const Movies = () => {
   }, [movieName]);
 
   return (
-    <main>
+    <MoviesMain>
       <SearchBox onSubmit={updateQueryString} />
       <MovieList movies={movie} />
-    </main>
+    </MoviesMain>
   );
 };
 

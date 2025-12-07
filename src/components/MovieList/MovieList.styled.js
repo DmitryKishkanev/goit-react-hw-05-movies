@@ -7,14 +7,20 @@ const MoviesList = styled.ul`
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 0;
-  list-style: none;
+  margin: 0;
 `;
 
 const MovieItem = styled.li`
+  width: 400px;
+  /* height: 225px; */
+
   object-fit: cover;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  &:hover {
+  list-style-type: none;
+
+  &:hover,
+  &:focus {
     transform: scale(1.03);
   }
 `;
@@ -26,6 +32,8 @@ const MovieLink = styled(NavLink)`
 
 const MovieImg = styled.img`
   margin-bottom: 6px;
+  width: 100%;
+  height: 225px;
 
   object-fit: cover;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),

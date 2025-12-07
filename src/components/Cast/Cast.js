@@ -1,7 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchMovies } from 'moviesApi';
-import noImage from 'img/no-image.jpg';
+import noImage from 'img/no_img.jpg';
+import {
+  CastContainer,
+  СastSection,
+  СastSectionItem,
+  СastSectionImg,
+  ActorName,
+  CharacterName,
+  СastSectionButton,
+} from 'components/Cast/Cast.styled';
 
 const Cast = () => {
   const [castList, setCastList] = useState([]);
@@ -45,7 +54,7 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <div>
+    <CastContainer>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -53,29 +62,29 @@ const Cast = () => {
       ) : castList.length === 0 ? (
         <p>We don't have a cast list for this movie</p>
       ) : (
-        <ul>
+        <СastSection>
           {castList.map(castItem => (
-            <li key={castItem.credit_id}>
-              <img
+            <СastSectionItem key={castItem.credit_id}>
+              <СastSectionImg
                 src={
                   castItem.profile_path
-                    ? `https://image.tmdb.org/t/p/w200${castItem.profile_path}`
+                    ? `https://image.tmdb.org/t/p/w500${castItem.profile_path}`
                     : noImage
                 }
                 alt={castItem.name}
               />
-
-              <p>{castItem.original_name}</p>
-              <p>{`Character: ${castItem.character}`}</p>
-            </li>
+              <ActorName>{castItem.original_name}</ActorName>
+              <span>character:</span>
+              <CharacterName>{castItem.character}</CharacterName>
+            </СastSectionItem>
           ))}
-        </ul>
+        </СastSection>
       )}
 
-      <button type="button" onClick={handleClose}>
+      <СastSectionButton type="button" onClick={handleClose}>
         Close
-      </button>
-    </div>
+      </СastSectionButton>
+    </CastContainer>
   );
 };
 

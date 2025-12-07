@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
+import {
+  SearchForm,
+  SearchFormLabel,
+  SearchFormSpan,
+  SearchFormInput,
+  SearchFormButton,
+} from 'components/SearchBox/SearchBox.styled';
 
 const SearchBox = ({ onSubmit }) => {
   const [movieName, setMovieName] = useState('');
@@ -21,19 +28,19 @@ const SearchBox = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <span>Enter movie title</span>
-        <input
+    <SearchForm onSubmit={handleSubmit}>
+      <SearchFormLabel>
+        <SearchFormSpan>Enter movie title</SearchFormSpan>
+        <SearchFormInput
           type="text"
           name="movieName"
           value={movieName}
           onChange={handleNameChange}
         />
-      </label>
+      </SearchFormLabel>
 
-      <button type="submit">Search</button>
-    </form>
+      <SearchFormButton type="submit">Search</SearchFormButton>
+    </SearchForm>
   );
 };
 

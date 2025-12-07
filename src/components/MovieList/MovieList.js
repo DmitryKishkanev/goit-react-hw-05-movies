@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import noPoster from 'img/no_poster.jpg';
 import {
   MoviesList,
   MovieItem,
@@ -16,7 +17,11 @@ const MovieList = ({ movies }) => {
         <MovieItem key={movie.id}>
           <MovieLink to={`/movies/${movie.id}`} state={{ from: location }}>
             <MovieImg
-              src={`https://image.tmdb.org/t/p/w400${movie.backdrop_path}`}
+              src={
+                movie.backdrop_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+                  : noPoster
+              }
               alt={movie.title}
             />
             <MovieTitle>{movie.title}</MovieTitle>

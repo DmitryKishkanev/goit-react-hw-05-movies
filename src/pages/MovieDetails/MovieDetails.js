@@ -3,6 +3,12 @@ import { useRef, useState, useEffect, Suspense } from 'react';
 import { fetchMovies } from 'moviesApi';
 import BackLink from 'components/BackLink';
 import MoviesItem from 'components/MoviesItem';
+import {
+  MovieMain,
+  MovieDetailsTitle,
+  MovieDetailsList,
+  MovieDetailsItem,
+} from 'pages/MovieDetails/MovieDetails.styled';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({});
@@ -13,8 +19,8 @@ const MovieDetails = () => {
   useEffect(() => {
     const getMovies = async () => {
       try {
-        const resMovies = await fetchMovies(`movie/${movieId}`);
-        setMovie(resMovies);
+        const resMovie = await fetchMovies(`movie/${movieId}`);
+        setMovie(resMovie);
       } catch (error) {
         console.error('Error receiving movie:', error);
       }
@@ -26,22 +32,23 @@ const MovieDetails = () => {
     return <p>Фильм не найден или данные ещё загружаются...</p>;
   }
   return (
-    <main>
+    <MovieMain>
       <BackLink to={backLinkHref.current}>Go back</BackLink>
       <MoviesItem movie={movie} />
 
-      <ul>
-        <li>
+      <MovieDetailsTitle>Additional information</MovieDetailsTitle>
+      <MovieDetailsList>
+        <MovieDetailsItem>
           <NavLink to="cast">Cast</NavLink>
-        </li>
-        <li>
+        </MovieDetailsItem>
+        <MovieDetailsItem>
           <NavLink to="reviews">Reviews</NavLink>
-        </li>
-      </ul>
+        </MovieDetailsItem>
+      </MovieDetailsList>
       <Suspense fallback={<div>Loading subpage...</div>}>
         <Outlet />
       </Suspense>
-    </main>
+    </MovieMain>
   );
 };
 
