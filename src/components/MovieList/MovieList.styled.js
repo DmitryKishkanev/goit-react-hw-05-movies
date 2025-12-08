@@ -12,7 +12,6 @@ const MoviesList = styled.ul`
 
 const MovieItem = styled.li`
   width: 400px;
-  /* height: 225px; */
 
   object-fit: cover;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
