@@ -34,8 +34,9 @@ const Cast = () => {
         setCastList(resMovieCast?.cast || []);
         setError(null);
       } catch (error) {
-        if (error.name === 'AbortError') {
-          console.log('Request canceled');
+        if (error.code === 'ERR_CANCELED') {
+          // Запрос отменён — просто игнорируем
+          return;
         } else {
           setError(
             `Failed to load cast list: ${error.message || 'Unknown error'}`,
@@ -50,6 +51,7 @@ const Cast = () => {
 
     return () => {
       controller.abort();
+      console.log('Cast: Компонент размонтирован, запрос прерван');
     };
   }, [movieId]);
 

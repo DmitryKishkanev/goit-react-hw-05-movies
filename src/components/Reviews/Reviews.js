@@ -30,8 +30,9 @@ const Reviews = () => {
         setReviews(resMovieReviews?.results || []);
         setError(null);
       } catch (error) {
-        if (error.name === 'AbortError') {
-          console.log('Request canceled');
+        if (error.code === 'ERR_CANCELED') {
+          // Запрос отменён — просто игнорируем
+          return;
         } else {
           setError(
             `Failed to load reviews: ${error.message || 'Unknown error'}`,
@@ -46,6 +47,7 @@ const Reviews = () => {
 
     return () => {
       controller.abort();
+      console.log('Reviews: Компонент размонтирован, запрос прерван');
     };
   }, [movieId]);
 

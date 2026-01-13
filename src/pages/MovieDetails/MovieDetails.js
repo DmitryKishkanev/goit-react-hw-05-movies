@@ -17,15 +17,28 @@ const MovieDetails = () => {
   const backLinkHref = useRef(location.state?.from ?? '/movies');
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const getMovies = async () => {
       try {
-        const resMovie = await fetchMovies(`movie/${movieId}`);
+        const resMovie = await fetchMovies(`movie/${movieId}`, {
+          signal: controller.signal,
+        });
         setMovie(resMovie);
       } catch (error) {
+        if (error.name === 'AbortError' || error.code === 'ERR_CANCELED') {
+          // Запрос отменён — просто игнорируем
+          return;
+        }
         console.error('Error receiving movie:', error);
       }
     };
     getMovies();
+
+    return () => {
+      controller.abort();
+      console.log('MovieDetails: Компонент размонтирован, запрос прерван');
+    };
   }, [movieId]);
 
   if (!movie) {
