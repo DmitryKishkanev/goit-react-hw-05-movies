@@ -28,6 +28,7 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="movies" element={<Movies />} />
             <Route path="movies/:movieId" element={<MovieDetails />}>
+        // Внутри этих двух маршрутов использыется useParams(), для получить значения динамических сегментов из URL, что бы реализовать http запрос с этим параметром 
               <Route path="cast" element={<Cast />} />
               <Route path="reviews" element={<Reviews />} />
             </Route>
