@@ -16,6 +16,7 @@ const Cast = () => {
   const [castList, setCastList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  //  useParams(), для получить значения динамических сегментов из URL, что бы реализовать http запрос с этим параметром 
   const { movieId } = useParams();
   const navigate = useNavigate();
 
